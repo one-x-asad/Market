@@ -36,8 +36,9 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://OptovkaGagarina.up.railway.app"
+    "https://optovkagagarina.up.railway.app"
 ]
+
 
 
 
