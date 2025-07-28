@@ -26,15 +26,15 @@ SECRET_KEY = 'django-insecure-^i6u=zpa72tn4a6i*8tx%77h)tn5@7####1qc$xi*2%z5epfvv
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'https://OptovkaGagarina.up.railway.app',  # ✅ Railway domeningiz
+    'OptovkaGagarina.up.railway.app',
     'localhost',
     '127.0.0.1'
 ]
 
-# Railway uchun zarur sozlamalar
 CSRF_TRUSTED_ORIGINS = [
     "https://OptovkaGagarina.up.railway.app"
 ]
+
 
 
 # Application definition
