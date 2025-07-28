@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}📦 Buyurtmalar{% endblock %}
+
+{% block content %}
+<style>
+  body {
+    background: linear-gradient(135deg, #fdfbfb, #ebedee);
+  }
+
+  .order-card {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .order-card:hover {
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+  }
+
+  .order-header {
+    background: linear-gradient(90deg, #e3f2fd, #fce4ec);
+    border-bottom: 1px solid #ddd;
+  }
+
+  .order-header span {
+    font-size: 0.95rem;
+  }
+
+  .table thead {
+    background-color: #f8f9fa;
+    font-size: 0.9rem;
+  }
+
+  .table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  .table td,
+  .table th {
+    vertical-align: middle;
+  }
+
+  .no-orders {
+    background-color: #e3f2fd;
+    border-left: 4px solid #42a5f5;
+    font-weight: 500;
+  }
+</style>
+
+<div class="container py-4">
+  <h4 class="mb-4 text-center text-primary fw-bold">📦 Buyurtmalar ro'yxati</h4>
+
+  {% if grouped_orders %}
+    {% for group in grouped_orders %}
+      <div class="order-card mb-4">
+        <div class="order-header d-flex justify-content-between align-items-center px-4 py-3">
+          <span class="fw-semibold text-secondary">
+            <i class="bi bi-clock-history"></i> 🕒 {{ group.timestamp }}
+          </span>
+          <span class="fw-bold text-dark">
+            Umumiy: <span class="text-success">{{ group.total|intcomma }} so'm</span>
+          </span>
+        </div>
+
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover table-borderless m-0">
+              <thead class="text-muted small">
+                <tr class="border-bottom">
+                  <th class="ps-4">#</th>
+                  <th>Mahsulot</th>
+                  <th>Ism</th>
+                  <th>Email</th>
+                  <th class="text-end pe-4">Narx</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for order in group.orders %}
+                  <tr>
+                    <td class="ps-4">{{ forloop.counter }}</td>
+                    <td>{{ order.product.nom }}</td>
+                    <td>{{ order.order.customer_name|default:"–" }}</td>
+                    <td>{{ order.order.customer_email|default:"–" }}</td>
+                    <td class="text-end pe-4 text-success">
+                      {{ order.product.narx|intcomma }} so'm
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="alert alert-info no-orders text-center shadow-sm py-3 mt-4 rounded-3">
+      Hech qanday buyurtma mavjud emas.
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

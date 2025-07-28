@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kirish</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #e0f7fa, #fce4ec);
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .login-card {
+      background-color: #ffffffee;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      max-width: 400px;
+      margin: 80px auto;
+    }
+
+    .login-title {
+      font-weight: bold;
+      color: #37474f;
+    }
+
+    .form-label {
+      color: #37474f;
+      font-weight: 500;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .form-control:focus {
+      border-color: #42a5f5;
+      box-shadow: 0 0 0 0.2rem rgba(66, 165, 245, 0.25);
+    }
+
+    .login-btn {
+      background-color: #42a5f5;
+      color: white;
+      font-weight: bold;
+      transition: 0.3s;
+      border-radius: 8px;
+    }
+
+    .login-btn:hover {
+      background-color: #1e88e5;
+    }
+
+    .register-link {
+      color: #009688;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .register-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 576px) {
+      .login-card {
+        margin: 40px 20px;
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-card">
+    <div class="text-center mb-4">
+      <h3 class="login-title">🔐 Tizimga kirish</h3>
+      <p class="text-muted">Telefon raqamingiz va parolingizni kiriting</p>
+    </div>
+
+    <form method="POST" novalidate>
+      {% csrf_token %}
+      {% for field in forms %}
+        <div class="mb-3">
+          <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}
+            <div class="text-danger small">{{ field.errors|striptags }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+
+      <button type="submit" class="btn login-btn w-100 mt-2">➡️ Kirish</button>
+    </form>
+
+    <div class="text-center mt-4">
+      <span class="text-muted">Hisobingiz yo‘qmi?</span><br>
+      <a href="{% url 'sign' %}" class="register-link">📝 Ro‘yxatdan o‘tish</a>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+{% block title %}Ximya Bo‘limi{% endblock %}
+
+{% block content %}
+<style>
+  .container.py-4 {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  .card {
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  }
+
+  .card-img-top {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    object-fit: cover;
+    height: 150px;
+  }
+
+  .card-body {
+    padding: 1rem 1.25rem;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2c3e50;
+  }
+
+  .card-text {
+    font-size: 1rem;
+    color: #4a4a4a;
+    margin-bottom: 1rem;
+  }
+
+  .btn-red {
+    background-color: #d32f2f;
+    border: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    color: #fff;
+  }
+
+  .btn-red:hover,
+  .btn-red:focus {
+    background-color: #b71c1c;
+    box-shadow: 0 0 10px rgba(211, 47, 47, 0.7);
+    color: #fff;
+  }
+
+  .btn-secondary {
+    background-color: #7f8c8d;
+    border: none;
+    font-weight: 600;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    color: white;
+  }
+
+  .btn-secondary:hover,
+  .btn-secondary:focus {
+    background-color: #6c7a7b;
+    box-shadow: 0 0 10px rgba(127, 140, 141, 0.7);
+    text-decoration: none;
+  }
+
+  .my-3 {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  @media (max-width: 767px) {
+    .card-img-top {
+      height: 130px;
+    }
+  }
+</style>
+
+<div class="container py-4">
+  <h2 class="mb-4 text-center">Ximya Bo‘limi</h2>
+  <div class="row g-4">
+
+    <!-- Mahsulotlar boshlanishi -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="/static/images/clear.png" class="card-img-top" alt="Shampun">
+        <div class="card-body text-center">
+          <h5 class="card-title">Shampun</h5>
+          <p class="card-text">Narxi: 18 000 so'm</p>
+          <button onclick="addToCart('Shampun', 18000)" class="btn-red btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Kir+yuvish" class="card-img-top" alt="Kir yuvish kukuni">
+        <div class="card-body text-center">
+          <h5 class="card-title">Kir yuvish kukuni</h5>
+          <p class="card-text">Narxi: 25 000 so'm</p>
+          <button onclick="addToCart('Kir yuvish kukuni', 25000)" class="btn-red btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Qolgan 13 ta mahsulot shu yerda -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Idish+yuvish" class="card-img-top" alt="Idish yuvish vositasi">
+        <div class="card-body text-center">
+          <h5 class="card-title">Idish yuvish vositasi</h5>
+          <p class="card-text">Narxi: 14 000 so'm</p>
+          <button onclick="addToCart('Idish yuvish vositasi', 14000)" class="btn-red btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Pol+tozalovchi" class="card-img-top" alt="Pol tozalovchi">
+        <div class="card-body text-center">
+          <h5 class="card-title">Pol tozalovchi</h5>
+          <p class="card-text">Narxi: 12 000 so'm</p>
+          <button onclick="addToCart('Pol tozalovchi', 12000)" class="btn-red btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- (ko'paytirish) -->
+    <div class="col-md-6 col-lg-4"><div class="card h-100 shadow-sm"><img src="https://via.placeholder.com/250x150?text=Oyna+tozalovchi" class="card-img-top" alt="Oyna tozalovchi"><div class="card-body text-center"><h5 class="card-title">Oyna tozalovchi</h5><p class="card-text">Narxi: 11 000 so'm</p><button onclick="addToCart('Oyna tozalovchi', 11000)" class="btn-red btn">Savatga qo‘shish</button></div></div></div>
+    <div class="col-md-6 col-lg-4"><div class="card h-100 shadow-sm"><img src="https://via.placeholder.com/250x150?text=Ariel+kapsula" class="card-img-top" alt="Ariel kapsula"><div class="card-body text-center"><h5 class="card-title">Ariel kapsula</h5><p class="card-text">Narxi: 30 000 so'm</p><button onclick="addToCart('Ariel kapsula', 30000)" class="btn-red btn">Savatga qo‘shish</button></div></div></div>
+    <div class="col-md-6 col-lg-4"><div class="card h-100 shadow-sm"><img src="https://via.placeholder.com/250x150?text=Fairy+gel" class="card-img-top" alt="Fairy gel"><div class="card-body text-center"><h5 class="card-title">Fairy gel</h5><p class="card-text">Narxi: 16 000 so'm</p><button onclick="addToCart('Fairy gel', 16000)" class="btn-red btn">Savatga qo‘shish</button></div></div></div>
+    <div class="col-md-6 col-lg-4"><div class="card h-100 shadow-sm"><img src="https://via.placeholder.com/250x150?text=Losyon" class="card-img-top" alt="Losyon"><div class="card-body text-center"><h5 class="card-title">Losyon</h5><p class="card-text">Narxi: 22 000 so'm</p><button onclick="addToCart('Losyon', 22000)" class="btn-red btn">Savatga qo‘shish</button></div></div></div>
+    <div class="col-md-6 col-lg-4"><div class="card h-100 shadow-sm"><img src="https://via.placeholder.com/250x150?text=Suyuq+sovun" class="card-img-top" alt="Suyuq sovun"><div class="card-body text-center"><h5 class="card-title">Suyuq sovun</h5><p class="card-text">Narxi: 9 000 so'm</p><button onclick="addToCart('Suyuq sovun', 9000)" class="btn-red btn">Savatga qo‘shish</button></div></div></div>
+    <div class="col-md-6 col-lg-4"><div class="card h-100 shadow-sm"><img src="https://via.placeholder.com/250x150?text=Qattiq+sovun" class="card-img-top" alt="Qattiq sovun"><div class="card-body text-center"><h5 class="card-title">Qattiq sovun</h5><p class="card-text">Narxi: 5 000 so'm</p><button onclick="addToCart('Qattiq sovun', 5000)" class="btn-red btn">Savatga qo‘shish</button></div></div></div>
+    <div class="col-md-6 col-lg-4"><div class="card h-100 shadow-sm"><img src="https://via.placeholder.com/250x150?text=Tozalovchi+sprey" class="card-img-top" alt="Tozalovchi spreyi"><div class="card-body text-center"><h5 class="card-title">Tozalovchi spreyi</h5><p class="card-text">Narxi: 15 000 so'm</p><button onclick="addToCart('Tozalovchi spreyi', 15000)" class="btn-red btn">Savatga qo‘shish</button></div></div></div>
+    <div class="col-md-6 col-lg-4"><div class="card h-100 shadow-sm"><img src="https://via.placeholder.com/250x150?text=Dezinfeksiya" class="card-img-top" alt="Dezinfeksiyalovchi"><div class="card-body text-center"><h5 class="card-title">Dezinfeksiyalovchi</h5><p class="card-text">Narxi: 20 000 so'm</p><button onclick="addToCart('Dezinfeksiyalovchi', 20000)" class="btn-red btn">Savatga qo‘shish</button></div></div></div>
+    <div class="col-md-6 col-lg-4"><div class="card h-100 shadow-sm"><img src="https://via.placeholder.com/250x150?text=Xlorli" class="card-img-top" alt="Xlorli tozalagich"><div class="card-body text-center"><h5 class="card-title">Xlorli tozalagich</h5><p class="card-text">Narxi: 11 000 so'm</p><button onclick="addToCart('Xlorli tozalagich', 11000)" class="btn-red btn">Savatga qo‘shish</button></div></div></div>
+    <div class="col-md-6 col-lg-4"><div class="card h-100 shadow-sm"><img src="https://via.placeholder.com/250x150?text=Agartici" class="card-img-top" alt="Agartici"><div class="card-body text-center"><h5 class="card-title">Agartici</h5><p class="card-text">Narxi: 13 000 so'm</p><button onclick="addToCart('Agartici', 13000)" class="btn-red btn">Savatga qo‘shish</button></div></div></div>
+    <div class="col-md-6 col-lg-4"><div class="card h-100 shadow-sm"><img src="https://via.placeholder.com/250x150?text=Tualet+gel" class="card-img-top" alt="Tualet geli"><div class="card-body text-center"><h5 class="card-title">Tualet geli</h5><p class="card-text">Narxi: 10 000 so'm</p><button onclick="addToCart('Tualet geli', 10000)" class="btn-red btn">Savatga qo‘shish</button></div></div></div>
+
+  </div>
+
+  <div class="container my-3 text-center">
+    <a href="{% url 'saxifa' %}" class="btn btn-secondary">← Orqaga</a>
+  </div>
+</div>
+{% endblock %}

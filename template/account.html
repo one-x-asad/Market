@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block title %}Hisobni to‘ldirish{% endblock %}
+
+{% block style %}
+<style>
+  body {
+    background: linear-gradient(135deg, #e3f2fd, #fce4ec);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+  }
+
+  .account-box {
+    max-width: 480px;
+    background-color: #ffffffee;
+    margin: 60px auto;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+
+  .account-box h2 {
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+  }
+
+  .balance-display {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #28a745;
+    margin-bottom: 25px;
+  }
+
+  .amount-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+
+  .amount-wrapper {
+    position: relative;
+  }
+
+  .amount-radio {
+    display: none;
+  }
+
+  .amount-option {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    height: 80px;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    background-color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: 0.2s;
+  }
+
+  .amount-wrapper input:checked + .amount-option {
+    border-color: #0d6efd;
+    background-color: #d6eaff;
+    color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2);
+  }
+
+  .btn-fill {
+    margin-top: 20px;
+    font-weight: 600;
+    padding: 12px;
+  }
+
+  .alert-danger {
+    margin-top: 15px;
+  }
+
+  @media (max-width: 576px) {
+    .account-box {
+      margin: 30px 15px;
+      padding: 20px;
+    }
+
+    .amount-option {
+      width: 100px;
+      height: 70px;
+      font-size: 1rem;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="account-box text-center">
+  <h2>👋 Salom, <span class="text-primary">{{ request.user.username }}</span></h2>
+
+  <div class="balance-display">
+    💰 {{ balance|default:0|intcomma }} so'm
+  </div>
+
+  {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    <p class="mb-3 fw-semibold">Hisobni qaysi summaga to‘ldirmoqchisiz?</p>
+
+    <div class="amount-options">
+      <label class="amount-wrapper">
+        <input class="amount-radio" type="radio" name="amount" value="100000" required>
+        <span class="amount-option">100 000 so‘m</span>
+      </label>
+      <label class="amount-wrapper">
+        <input class="amount-radio" type="radio" name="amount" value="150000">
+        <span class="amount-option">150 000 so‘m</span>
+      </label>
+      <label class="amount-wrapper">
+        <input class="amount-radio" type="radio" name="amount" value="200000">
+        <span class="amount-option">200 000 so‘m</span>
+      </label>
+      <label class="amount-wrapper">
+        <input class="amount-radio" type="radio" name="amount" value="250000">
+        <span class="amount-option">250 000 so‘m</span>
+      </label>
+    </div>
+
+    <button type="submit" class="btn btn-success w-100 btn-fill">➕ Hisobni to‘ldirish</button>
+  </form>
+</div>
+{% endblock %}

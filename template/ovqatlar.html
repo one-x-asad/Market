@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+
+{% block title %}Ovqatlar Bo‘limi{% endblock %}
+
+{% block content %}
+<style>
+  .container.py-4 {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  .card {
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  }
+
+  .card-img-top {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    object-fit: cover;
+    height: 150px;
+  }
+
+  .card-body {
+    padding: 1rem 1.25rem;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2c3e50;
+  }
+
+  .card-text {
+    font-size: 1rem;
+    color: #4a4a4a;
+    margin-bottom: 1rem;
+  }
+
+  /* Shokolad tugmasi: to'q ko'k */
+  .btn-chocolate {
+    background-color: #283593;
+    border: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    color: #fff;
+  }
+  .btn-chocolate:hover, .btn-chocolate:focus {
+    background-color: #1a237e;
+    box-shadow: 0 0 10px rgba(40, 53, 147, 0.7);
+    color: #fff;
+  }
+
+  /* Qaymoq tugmasi: to'q sariq */
+  .btn-cream {
+    background-color: #f9a825;
+    border: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    color: #222;
+  }
+  .btn-cream:hover, .btn-cream:focus {
+    background-color: #f57f17;
+    box-shadow: 0 0 10px rgba(249, 168, 37, 0.7);
+    color: #fff;
+  }
+
+  .btn-secondary {
+    background-color: #7f8c8d;
+    border: none;
+    font-weight: 600;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    color: white;
+  }
+  .btn-secondary:hover, .btn-secondary:focus {
+    background-color: #6c7a7b;
+    box-shadow: 0 0 10px rgba(127, 140, 141, 0.7);
+    text-decoration: none;
+  }
+
+  .my-3 {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  @media (max-width: 767px) {
+    .card-img-top {
+      height: 130px;
+    }
+  }
+</style>
+
+<div class="container py-4">
+  <h2 class="mb-4 text-center">Ovqatlar Bo‘limi</h2>
+  <div class="row g-4">
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Shokolad" class="card-img-top" alt="Shokolad">
+        <div class="card-body text-center">
+          <h5 class="card-title">Shokolad</h5>
+          <p class="card-text">Narxi: 10 000 so'm</p>
+          <button onclick="addToCart('Shokolad', 10000)" class="btn-chocolate btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Qaymoq" class="card-img-top" alt="Qaymoq">
+        <div class="card-body text-center">
+          <h5 class="card-title">Qaymoq</h5>
+          <p class="card-text">Narxi: 7 000 so'm</p>
+          <button onclick="addToCart('Qaymoq', 7000)" class="btn-cream btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+        <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Yogurt" class="card-img-top" alt="Yogurt">
+        <div class="card-body text-center">
+          <h5 class="card-title">Yogurt</h5>
+          <p class="card-text">Narxi: 9 000 so'm</p>
+          <button onclick="addToCart('Yogurt', 9000)" class="btn-cream btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Non" class="card-img-top" alt="Non">
+        <div class="card-body text-center">
+          <h5 class="card-title">Non</h5>
+          <p class="card-text">Narxi: 2 000 so'm</p>
+          <button onclick="addToCart('Non', 2000)" class="btn-cream btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Konfet" class="card-img-top" alt="Konfet">
+        <div class="card-body text-center">
+          <h5 class="card-title">Konfet</h5>
+          <p class="card-text">Narxi: 12 000 so'm</p>
+          <button onclick="addToCart('Konfet', 12000)" class="btn-chocolate btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Pishloq" class="card-img-top" alt="Pishloq">
+        <div class="card-body text-center">
+          <h5 class="card-title">Pishloq</h5>
+          <p class="card-text">Narxi: 15 000 so'm</p>
+          <button onclick="addToCart('Pishloq', 15000)" class="btn-cream btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Tvorog" class="card-img-top" alt="Tvorog">
+        <div class="card-body text-center">
+          <h5 class="card-title">Tvorog</h5>
+          <p class="card-text">Narxi: 11 000 so'm</p>
+          <button onclick="addToCart('Tvorog', 11000)" class="btn-cream btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Murabbo" class="card-img-top" alt="Murabbo">
+        <div class="card-body text-center">
+          <h5 class="card-title">Murabbo</h5>
+          <p class="card-text">Narxi: 13 000 so'm</p>
+          <button onclick="addToCart('Murabbo', 13000)" class="btn-chocolate btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Grechka" class="card-img-top" alt="Grechka">
+        <div class="card-body text-center">
+          <h5 class="card-title">Grechka</h5>
+          <p class="card-text">Narxi: 10 500 so'm</p>
+          <button onclick="addToCart('Grechka', 10500)" class="btn-cream btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Go‘sht" class="card-img-top" alt="Go‘sht">
+        <div class="card-body text-center">
+          <h5 class="card-title">Go‘sht</h5>
+          <p class="card-text">Narxi: 75 000 so'm</p>
+          <button onclick="addToCart('Go‘sht', 75000)" class="btn-chocolate btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Makaron" class="card-img-top" alt="Makaron">
+        <div class="card-body text-center">
+          <h5 class="card-title">Makaron</h5>
+          <p class="card-text">Narxi: 6 000 so'm</p>
+          <button onclick="addToCart('Makaron', 6000)" class="btn-cream btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Sosiska" class="card-img-top" alt="Sosiska">
+        <div class="card-body text-center">
+          <h5 class="card-title">Sosiska</h5>
+          <p class="card-text">Narxi: 24 000 so'm</p>
+          <button onclick="addToCart('Sosiska', 24000)" class="btn-chocolate btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Smetana" class="card-img-top" alt="Smetana">
+        <div class="card-body text-center">
+          <h5 class="card-title">Smetana</h5>
+          <p class="card-text">Narxi: 8 000 so'm</p>
+          <button onclick="addToCart('Smetana', 8000)" class="btn-cream btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="container my-3 text-center">
+    <a href="{% url 'saxifa' %}" class="btn btn-secondary">
+      ← Orqaga
+    </a>
+  </div>
+</div>
+{% endblock %}

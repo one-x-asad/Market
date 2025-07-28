@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}Buyurtma yakunlandi{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <!-- Xabar -->
+  <div class="alert alert-success text-center shadow-sm rounded-4">
+    <h2 class="mb-3 fw-bold text-success">✅ Buyurtmangiz qabul qilindi!</h2>
+    <p class="mb-1">Xaridingiz uchun tashakkur.</p>
+    <p class="mb-4 text-muted">Quyidagi mahsulotlar savatingizdan xarid qilindi:</p>
+  </div>
+
+  <!-- Mahsulotlar ro'yxati -->
+  <div class="card shadow-lg border-0 rounded-4">
+    <div class="card-body px-4 py-3">
+      <h5 class="card-title mb-3">🧾 Xarid qilingan mahsulotlar:</h5>
+      <ul class="list-group list-group-flush">
+        {% for product, count in orders %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div class="fw-medium">{{ product.nom }} <span class="text-muted">× {{ count }}</span></div>
+            <span class="fw-semibold text-success">{{ product.narx|floatformat:0|intcomma }} so'm</span>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <!-- Umumiy narx -->
+      <div class="text-end mt-4">
+        <h5 class="fw-bold text-dark">💰 Umumiy narx: <span class="text-success">{{ total|floatformat:0|intcomma }} so'm</span></h5>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bosh sahifaga qaytish -->
+  <div class="text-center mt-4">
+    <a href="{% url 'saxifa' %}" class="btn btn-primary px-4 py-2 shadow-sm fw-semibold">
+      🏠 Bosh sahifaga qaytish
+    </a>
+  </div>
+</div>
+
+<!-- Savatni tozalash -->
+  <!-- Confetti kutubxonasi -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+  localStorage.removeItem('cart');
+
+
+  // Sahifa yuklanganda konfetti otiladi
+  window.addEventListener("DOMContentLoaded", () => {
+    const duration = 2 * 1000; // 2 soniya
+    const end = Date.now() + duration;
+
+    (function frame() {
+      // Ikkita yonlama konfetti portlash
+      confetti({
+        particleCount: 4,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+        colors: ['#bb0000', '#ffffff'],
+      });
+      confetti({
+        particleCount: 4,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+        colors: ['#bb0000', '#ffffff'],
+      });
+
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    })();
+  });
+</script>
+{% endblock %}

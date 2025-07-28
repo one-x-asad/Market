@@ -1,0 +1,186 @@
+{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Mening Buyurtmalarim</title>
+    <style>
+        /* Umumiy fon va shrift */
+        body {
+            font-family: 'Nunito', Arial, sans-serif;
+            background: #f3f7f2; /* yengil yashil fon */
+            color: #2e3e2f; /* quyuq yashil matn */
+            padding: 30px 20px;
+            margin: 0;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Sarlavha va menu tugmasi joylashuvi */
+        .header-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        h1 {
+            font-weight: 700;
+            font-size: 2rem;
+            margin: 0;
+            white-space: nowrap;
+            color: #b33027; /* qizilga yaqin sarlavha */
+            text-shadow: 1px 1px 2px #8b261f;
+        }
+        .menu-button {
+            display: inline-block;
+            padding: 10px 22px;
+            background-color: #2e7d32; /* kuchli yashil tugma */
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            box-shadow: 0 3px 8px rgba(46, 125, 50, 0.4);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .menu-button:hover,
+        .menu-button:focus {
+            background-color: #27692a;
+            box-shadow: 0 4px 15px rgba(39, 105, 42, 0.6);
+        }
+
+        /* Jadval umumiy */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 14px;
+            background: transparent;
+        }
+
+        /* Jadval sarlavhalari */
+        th {
+            background-color: #b33027; /* qizil fon */
+            color: #fff;
+            font-weight: 700;
+            padding: 14px 16px;
+            text-align: left;
+            border-radius: 8px 8px 0 0;
+            user-select: none;
+            box-shadow: 0 2px 6px rgba(179, 48, 39, 0.6);
+        }
+
+        /* Jadval satrlari */
+        tbody tr {
+            background: #eaf4ea; /* och yashil fon satrlar uchun */
+            box-shadow: 0 1px 6px rgba(46, 125, 50, 0.15);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            border-radius: 0 0 8px 8px;
+        }
+        tbody tr:hover {
+            box-shadow: 0 8px 25px rgba(46, 125, 50, 0.3);
+            transform: translateY(-3px);
+            background: #d0e6d0;
+        }
+
+        /* Jadval hujayralari */
+        td {
+            padding: 14px 16px;
+            border: none;
+            vertical-align: middle;
+            font-size: 1rem;
+            color: #2e3e2f;
+        }
+
+        /* Oddiy qatordagi rang */
+        tbody tr:nth-child(even) {
+            background: #dcedd1; /* biroz farqli och yashil */
+        }
+
+        /* Sana va jami narx ustunlari o'ngga hizalanadi */
+        td:nth-child(2),
+        td:nth-child(4) {
+            text-align: right;
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
+            font-weight: 600;
+            color: #1b3b1b; /* quyuq yashil */
+        }
+
+        /* Mahsulotlar ustuni */
+        td:nth-child(3) {
+            white-space: pre-line; /* <br> lar ko‘rinishi uchun */
+        }
+
+        /* Bo‘sh holatda xabar */
+        p {
+            font-size: 1.2rem;
+            color: #6e2c25; /* quyuq qizil */
+            text-align: center;
+            margin-top: 50px;
+            font-weight: 600;
+        }
+
+        /* Mobil uchun moslashuv */
+        @media (max-width: 600px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .menu-button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+            td, th {
+                font-size: 0.9rem;
+                padding: 10px 12px;
+            }
+            td:nth-child(2),
+            td:nth-child(4) {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+      <a href="{% url 'saxifa' %}" class="menu-button">Menyu</a>
+      <h1>🧾 Mening Buyurtmalarim</h1>
+    </div>
+
+    {% if orders %}
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Sana</th>
+                    <th>Mahsulotlar</th>
+                    <th>Jami Narx</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ order.sana|date:"Y-m-d H:i" }}</td>
+                    <td>
+                        {% for p in order.products %}
+                            {{ p }}<br>
+                        {% endfor %}
+                    </td>
+                    <td>{{ order.total|intcomma }} so'm</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Sizda hali buyurtmalar yo‘q.</p>
+    {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+
+{% block title %}Ichimliklar Bo‘limi{% endblock %}
+
+{% block content %}
+<style>
+  .container.py-4 {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  .card {
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .card-img-top {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    object-fit: cover;
+    height: 150px;
+  }
+
+  .card-body {
+    padding: 1rem 1.25rem;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2c3e50;
+  }
+
+  .card-text {
+    font-size: 1rem;
+    color: #4a4a4a;
+    margin-bottom: 1rem;
+  }
+
+  /* Tugmalar */
+  .btn-kefir {
+    background-color: #039be5;
+  }
+
+  .btn-sut {
+    background-color: #8e24aa;
+  }
+
+  .btn-fanta {
+    background-color: #f57c00;
+  }
+
+  .btn-sprite {
+    background-color: #43a047;
+  }
+
+  .btn-ayran {
+    background-color: #00acc1;
+  }
+
+  .btn-kefir,
+  .btn-sut,
+  .btn-fanta,
+  .btn-sprite,
+  .btn-ayran {
+    border: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    color: #fff;
+  }
+
+  .btn-kefir:hover,
+  .btn-sut:hover,
+  .btn-fanta:hover,
+  .btn-sprite:hover,
+  .btn-ayran:hover {
+    filter: brightness(90%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    color: #fff;
+  }
+
+  .btn-secondary {
+    background-color: #7f8c8d;
+    border: none;
+    font-weight: 600;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    background-color: #6c7a7b;
+    box-shadow: 0 0 10px rgba(127, 140, 141, 0.7);
+  }
+
+  @media (max-width: 767px) {
+    .card-img-top {
+      height: 130px;
+    }
+  }
+</style>
+
+<div class="container py-4">
+  <h2 class="mb-4 text-center">Ichimliklar Bo‘limi</h2>
+  <div class="row g-4">
+
+    <!-- Kefir -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Kefir" class="card-img-top" alt="Kefir">
+        <div class="card-body text-center">
+          <h5 class="card-title">Kefir</h5>
+          <p class="card-text">Narxi: 8 000 so'm</p>
+          <button onclick="addToCart('Kefir', 8000)" class="btn-kefir btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sut -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Sut" class="card-img-top" alt="Sut">
+        <div class="card-body text-center">
+          <h5 class="card-title">Sut</h5>
+          <p class="card-text">Narxi: 9 000 so'm</p>
+          <button onclick="addToCart('Sut', 9000)" class="btn-sut btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fanta -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Fanta" class="card-img-top" alt="Fanta">
+        <div class="card-body text-center">
+          <h5 class="card-title">Fanta</h5>
+          <p class="card-text">Narxi: 9 500 so'm</p>
+          <button onclick="addToCart('Fanta', 9500)" class="btn-fanta btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sprite -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Sprite" class="card-img-top" alt="Sprite">
+        <div class="card-body text-center">
+          <h5 class="card-title">Sprite</h5>
+          <p class="card-text">Narxi: 9 500 so'm</p>
+          <button onclick="addToCart('Sprite', 9500)" class="btn-sprite btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ayran -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://via.placeholder.com/250x150?text=Ayran" class="card-img-top" alt="Ayran">
+        <div class="card-body text-center">
+          <h5 class="card-title">Ayran</h5>
+          <p class="card-text">Narxi: 8 500 so'm</p>
+          <button onclick="addToCart('Ayran', 8500)" class="btn-ayran btn">Savatga qo‘shish</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="container my-3 text-center">
+    <a href="{% url 'saxifa' %}" class="btn btn-secondary">
+      ← Orqaga
+    </a>
+  </div>
+</div>
+
+<!-- Savatga qo‘shish funksiyasi -->
+<script>
+  function addToCart(name, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const product = { name: name, price: price };
+    cart.push(product);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(name + " savatga qo‘shildi!");
+  }
+</script>
+{% endblock %}
